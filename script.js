@@ -6,13 +6,43 @@ const SUPABASE_URL = "https://msymgjqyaikdmulknmej.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_grSAHTfs6SCxAge6eUDJhA_x3t0H5Jl";
 
+// ==========================================
+// FUNÇÃO DE UPLOAD DE FOTO
+// ==========================================
+
+async function uploadFoto(arquivo) {
+
+    const extensao = arquivo.name.split(".").pop();
+
+    const nomeArquivo = `${Date.now()}.${extensao}`;
+
+    const resposta = await fetch(
+        `${SUPABASE_URL}/storage/v1/object/etiquetas/${nomeArquivo}`,
+        {
+            method: "POST",
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": `Bearer ${SUPABASE_KEY}`,
+                "Content-Type": arquivo.type
+            },
+            body: arquivo
+        }
+    );
+
+    if (!resposta.ok) {
+        const erro = await resposta.text();
+        console.error("Erro upload:", erro);
+        throw new Error("Erro ao enviar foto");
+    }
+
+    return `${SUPABASE_URL}/storage/v1/object/public/etiquetas/${nomeArquivo}`;
+}
 
 // ==========================================
 // FORMULÁRIO
 // ==========================================
 
 const formulario = document.getElementById("formEtiqueta");
-
 
 // ==========================================
 // PEGAR O TIPO DA ETIQUETA PELA URL
@@ -22,42 +52,43 @@ const parametros = new URLSearchParams(window.location.search);
 
 const tipo = parametros.get("tipo");
 
-
 // ==========================================
 // ENVIAR FORMULÁRIO
 // ==========================================
 
 formulario.addEventListener("submit", async function (event) {
 
-    // Impede o formulário de recarregar a página
     event.preventDefault();
 
-
-    // Pegar os valores preenchidos
     const nome = document.getElementById("nome").value;
     const planta = document.getElementById("planta").value;
     const equipamento = document.getElementById("equipamento").value;
     const descricao = document.getElementById("descricao").value;
 
+    const arquivoFoto =
+        document.getElementById("foto").files[0];
 
-    // Verificar se o tipo existe
     if (!tipo) {
         alert("Tipo de etiqueta não informado.");
         return;
     }
 
-
-    // Dados que serão enviados para o banco
-    const dados = {
-        tipo: tipo,
-        nome: nome,
-        planta: planta,
-        equipamento: equipamento,
-        descricao: descricao
-    };
-
-
     try {
+
+        let fotoUrl = null;
+
+        if (arquivoFoto) {
+            fotoUrl = await uploadFoto(arquivoFoto);
+        }
+
+        const dados = {
+            tipo: tipo,
+            nome: nome,
+            planta: planta,
+            equipamento: equipamento,
+            descricao: descricao,
+            foto_url: fotoUrl
+        };
 
         const resposta = await fetch(
             `${SUPABASE_URL}/rest/v1/etiqueta`,
@@ -75,8 +106,6 @@ formulario.addEventListener("submit", async function (event) {
             }
         );
 
-
-        // Verificar se houve erro
         if (!resposta.ok) {
 
             const erro = await resposta.text();
@@ -88,20 +117,15 @@ formulario.addEventListener("submit", async function (event) {
             return;
         }
 
-
-        // Sucesso
         alert("Etiqueta registrada com sucesso!");
 
-
-        // Limpar formulário
         formulario.reset();
-
 
     } catch (erro) {
 
         console.error("Erro:", erro);
 
-        alert("Não foi possível conectar ao banco de dados.");
+        alert("Não foi possível enviar a foto ou salvar a etiqueta.");
     }
 
 });
