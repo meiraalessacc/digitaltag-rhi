@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -8,89 +7,62 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <title>RHI MAGNESITA | Registro de Etiquetas</title>
+    <title>RHI MAGNESITA | Relatório de Etiquetas</title>
 </head>
 
 <body>
 
-    <main class="container">
+    <main class="container-relatorio">
 
-        <header class="titulo-formulario">
-            <h1>Registro de <span>Etiquetas</span></h1>
-            <p>Registre uma anomalia encontrada no equipamento.</p>
+        <header class="titulo-relatorio">
+            <h1>
+                Relatório de
+                <span>Etiquetas</span>
+            </h1>
+
+            <p>
+                Registros de anomalias cadastrados
+            </p>
         </header>
 
-       <form class="form" id="formEtiqueta">
 
-            <div class="campo">
-                <label for="nome">Nome completo</label>
-                <input 
-                    type="text" 
-                    id="nome" 
-                    name="nome"
-                    placeholder="Digite seu nome completo"
-                    required
-                >
-            </div>
+        <section class="tabela-container">
 
-       
-            <div class="campo">
-                <label for="planta">Planta</label>
+            <table>
 
-                <select id="planta" name="planta" required>
-                    <option value="" disabled selected>
-                        Selecione a planta
-                    </option>
-                    <option value="RK-1">RK-1</option>
-                    <option value="M-10">M-10</option>
-                </select>
-            </div>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Nome</th>
+                        <th>Planta</th>
+                        <th>Equipamento</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
 
-           
-        <div class="campo">
-    <label for="equipamento">Equipamento</label>
+                <tbody id="tabelaRegistros">
 
-    <select id="equipamento" name="equipamento" required>
-        <option value="" disabled selected>
-            Selecione o equipamento
-        </option>
+                    <tr>
+                        <td colspan="6">
+                            Carregando registros...
+                        </td>
+                    </tr>
 
-        <option value="Q-904">Q-904</option>
-        <option value="T-2302">T-2302</option>
-    </select>
-</div>
+                </tbody>
 
-           
-            <div class="campo">
-                <label for="descricao">Descrição da anomalia</label>
+            </table>
 
-                <textarea 
-                    id="descricao" 
-                    name="descricao"
-                    rows="6"
-                    placeholder="Descreva a anomalia encontrada..."
-                    required
-                ></textarea>
-            </div>
+        </section>
 
-           
-            <div class="acoes">
 
-                <button type="submit" class="btn-enviar">
-                    Enviar registro
-                </button>
-
-                <a href="relatorio.html" class="btn-relatorio">
-                    Ver relatório
-                </a>
-
-            </div>
-
-        </form>
+    
 
     </main>
-<script src="script.js"></script>
+
+
+    <script src="relatorio.js"></script>
+
 </body>
 
 </html>
-```
