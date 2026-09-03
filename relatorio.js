@@ -132,6 +132,9 @@ async function carregarRegistros() {
                 <td>
                     ${registro.nome || "-"}
                 </td>
+                <td>
+                    ${registro.matricula || "-"}
+                </td>
 
                 <td>
                     ${registro.planta || "-"}
@@ -232,3 +235,4 @@ function formatarData(data) {
 // ==========================================
 
 carregarRegistros();
+
