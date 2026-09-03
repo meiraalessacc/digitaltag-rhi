@@ -42,18 +42,22 @@
 
     </section>
     <script>
+        const params = new URLSearchParams(window.location.search);
 
-const params = new URLSearchParams(window.location.search);
-const planta = params.get("planta");
-const equipamento = params.get("equipamento");
-document.querySelector(".quadrado-vermelha").href =
-`formulario.html?tipo=vermelha&planta=${encodeURIComponent(planta)}&equipamento=${encodeURIComponent(equipamento)}`;
-document.querySelector(".quadrado-azul").href =
-`formulario.html?tipo=azul&planta=${encodeURIComponent(planta)}&equipamento=${encodeURIComponent(equipamento)}`;
-document.querySelector(".quadrado-amarela").href =
-`formulario.html?tipo=amarela&planta=${encodeURIComponent(planta)}&equipamento=${encodeURIComponent(equipamento)}`;
+        const planta = params.get("planta");
+        const equipamento = params.get("equipamento");
 
-</script>
+        document.querySelector(".quadrado-vermelha").href =
+            `formulario.html?tipo=vermelha&planta=${encodeURIComponent(planta)}&equipamento=${encodeURIComponent(equipamento)}`;
+
+        document.querySelector(".quadrado-azul").href =
+            `formulario.html?tipo=azul&planta=${encodeURIComponent(planta)}&equipamento=${encodeURIComponent(equipamento)}`;
+
+        document.querySelector(".quadrado-amarela").href =
+            `formulario.html?tipo=amarela&planta=${encodeURIComponent(planta)}&equipamento=${encodeURIComponent(equipamento)}`;
+
+        console.log(document.querySelector(".quadrado-vermelha").href);
+    </script>
 
 </body>
 
