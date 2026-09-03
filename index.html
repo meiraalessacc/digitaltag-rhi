@@ -26,9 +26,11 @@
 
         <div class="botao-inicio">
 
-            <a href="tipoEtiqueta.html" class="botao">
-                Registrar Etiqueta
-            </a>
+           <a href="tipoEtiqueta.html" id="btnRegistrar" class="botao">
+
+Registrar Etiqueta
+
+</a>
 
             <a href="Erro 404.html" class="botao">
                 Raio-X do Equipamento
@@ -39,5 +41,9 @@
     </div>
 
 </body>
+<script>
+document.getElementById("btnRegistrar").href =
+"tipoEtiqueta.html" + window.location.search;
+</script>
 
 </html>
