@@ -35,6 +35,10 @@ async function carregarRegistros() {
         );
 
 
+        // ==========================================
+        // VERIFICAR ERRO
+        // ==========================================
+
         if (!resposta.ok) {
 
             const erro = await resposta.text();
@@ -43,7 +47,7 @@ async function carregarRegistros() {
 
             tabela.innerHTML = `
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         Erro ao carregar os registros.
                     </td>
                 </tr>
@@ -53,15 +57,22 @@ async function carregarRegistros() {
         }
 
 
+        // ==========================================
+        // CONVERTER RESPOSTA PARA JSON
+        // ==========================================
+
         const registros = await resposta.json();
 
 
-        // Se não houver registros
+        // ==========================================
+        // SE NÃO HOUVER REGISTROS
+        // ==========================================
+
         if (registros.length === 0) {
 
             tabela.innerHTML = `
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         Nenhuma etiqueta cadastrada.
                     </td>
                 </tr>
@@ -71,42 +82,83 @@ async function carregarRegistros() {
         }
 
 
-        // Limpar mensagem de carregamento
+        // ==========================================
+        // LIMPAR TABELA
+        // ==========================================
+
         tabela.innerHTML = "";
 
 
-        // Criar as linhas
+        // ==========================================
+        // CRIAR LINHAS
+        // ==========================================
+
         registros.forEach(registro => {
 
             const linha = document.createElement("tr");
 
 
+            // ==========================================
+            // IMAGEM
+            // ==========================================
+
+            let imagemHTML = "-";
+
+
+            if (registro.foto_url) {
+
+                imagemHTML = `
+                    <img
+                        src="${registro.foto_url}"
+                        class="imagem-relatorio"
+                        alt="Imagem da etiqueta"
+                        onclick="window.open('${registro.foto_url}', '_blank')"
+                    >
+                `;
+
+            }
+
+
+            // ==========================================
+            // MONTAR LINHA
+            // ==========================================
+
             linha.innerHTML = `
+
                 <td>
                     ${formatarTipo(registro.tipo)}
                 </td>
 
                 <td>
-                    ${registro.nome}
+                    ${registro.nome || "-"}
                 </td>
 
                 <td>
-                    ${registro.planta}
+                    ${registro.planta || "-"}
                 </td>
 
                 <td>
-                    ${registro.equipamento}
+                    ${registro.equipamento || "-"}
                 </td>
 
                 <td>
-                    ${registro.descricao}
+                    ${registro.descricao || "-"}
                 </td>
 
                 <td>
                     ${formatarData(registro.data_registro)}
                 </td>
+
+                <td>
+                    ${imagemHTML}
+                </td>
+
             `;
 
+
+            // ==========================================
+            // ADICIONAR LINHA À TABELA
+            // ==========================================
 
             tabela.appendChild(linha);
 
@@ -119,11 +171,12 @@ async function carregarRegistros() {
 
         tabela.innerHTML = `
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     Não foi possível conectar ao banco de dados.
                 </td>
             </tr>
         `;
+
     }
 
 }
@@ -147,7 +200,7 @@ function formatarTipo(tipo) {
         return "🟡 Amarela";
     }
 
-    return tipo;
+    return tipo || "-";
 }
 
 
