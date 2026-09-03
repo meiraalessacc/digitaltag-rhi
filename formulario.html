@@ -2,94 +2,216 @@
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
 
     <title>RHI MAGNESITA | Registro de Etiquetas</title>
+
 </head>
+
 
 <body>
 
     <main class="container">
 
+
+        <!-- ==========================================
+             CABEÇALHO
+        =========================================== -->
+
         <header class="titulo-formulario">
-            <h1>Registro de <span>Etiquetas</span></h1>
-            <p>Registre uma anomalia encontrada no equipamento.</p>
+
+            <h1>
+                Registro de
+                <span>Etiquetas</span>
+            </h1>
+
+            <p>
+                Registre uma anomalia encontrada no equipamento.
+            </p>
+
         </header>
 
-       <form class="form" id="formEtiqueta">
+
+
+        <!-- ==========================================
+             FORMULÁRIO
+        =========================================== -->
+
+        <form class="form" id="formEtiqueta">
+
+
+            <!-- ==========================================
+                 NOME
+            =========================================== -->
 
             <div class="campo">
-                <label for="nome">Nome completo</label>
-                <input 
-                    type="text" 
-                    id="nome" 
+
+                <label for="nome">
+                    Nome completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
                     name="nome"
                     placeholder="Digite seu nome completo"
                     required
                 >
+
             </div>
 
-       
-            <div class="campo">
-                <label for="planta">Planta</label>
 
-                <select id="planta" name="planta" required>
-                    <option value="" disabled selected>
-                        Selecione a planta
-                    </option>
-                    <option value="RK-1">RK-1</option>
-                    <option value="M-10">M-10</option>
-                </select>
+
+            <!-- ==========================================
+                 MATRÍCULA
+            =========================================== -->
+
+            <div class="campo">
+
+                <label for="matricula">
+                    Número de matrícula
+                </label>
+
+                <input
+                    type="text"
+                    id="matricula"
+                    name="matricula"
+                    placeholder="Informe sua matrícula"
+                    inputmode="numeric"
+                    pattern="[0-9]+"
+                    required
+                >
+
             </div>
 
-           
-        <div class="campo">
-    <label for="equipamento">Equipamento</label>
 
-    <select id="equipamento" name="equipamento" required>
-        <option value="" disabled selected>
-            Selecione o equipamento
-        </option>
 
-        <option value="Q-904">Q-904</option>
-        <option value="T-2302">T-2302</option>
-    </select>
-</div>
+            <!-- ==========================================
+                 PLANTA
+            =========================================== -->
 
-           
             <div class="campo">
-                <label for="descricao">Descrição da anomalia</label>
 
-                <textarea 
-                    id="descricao" 
+                <label for="planta">
+                    Planta
+                </label>
+
+                <input
+                    type="text"
+                    id="planta"
+                    name="planta"
+                    placeholder="Será preenchida pelo QR Code"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 EQUIPAMENTO
+            =========================================== -->
+
+            <div class="campo">
+
+                <label for="equipamento">
+                    Equipamento
+                </label>
+
+                <input
+                    type="text"
+                    id="equipamento"
+                    name="equipamento"
+                    placeholder="Será preenchido pelo QR Code"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 DESCRIÇÃO
+            =========================================== -->
+
+            <div class="campo">
+
+                <label for="descricao">
+                    Descrição da anomalia
+                </label>
+
+                <textarea
+                    id="descricao"
                     name="descricao"
                     rows="6"
                     placeholder="Descreva a anomalia encontrada..."
                     required
                 ></textarea>
+
             </div>
 
-           
+
+
+            <!-- ==========================================
+                 FOTO
+            =========================================== -->
+
+            <div class="campo">
+
+                <label for="foto">
+                    Foto da anomalia
+                </label>
+
+                <input
+                    type="file"
+                    id="foto"
+                    name="foto"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 AÇÕES
+            =========================================== -->
+
             <div class="acoes">
 
-                <button type="submit" class="btn-enviar">
+                <button
+                    type="submit"
+                    class="btn-enviar"
+                >
                     Enviar registro
                 </button>
 
-                <a href="relatorio.html" class="btn-relatorio">
+
+                <a
+                    href="relatorio.html"
+                    class="btn-relatorio"
+                >
                     Ver relatório
                 </a>
 
             </div>
 
+
         </form>
 
     </main>
-<script src="script.js"></script>
+
+
+
+    <script src="script.js"></script>
+
 </body>
 
 </html>
-
